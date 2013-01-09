@@ -10,8 +10,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
   <body style="background-image: url(/static/images/bkgraund.png); background-attachment: fixed">
-  <div class="container">
-
+  <div class="container" align=center>
+		<br><br><br>
       <h1>Simply Todo List</h1>
       <p>for Ruby on Rails courses</p>
 
@@ -20,57 +20,50 @@
 <br>
 <br>	
 	
-	<div class="container" id="projects">
+	
+	<div class="container" id="projects" align=center>
 	{% if project_list %}
 		
 		{% for project in project_list %}
-		<span class="span6" id="projectSpan{{project.id}}" style="margin-bottom:40px">
-			<div class="nav-header" style="width:500px; background-color:#3a87ad; height:30px">				
-				<form id="projectFormEdit{{project.id}}" action="editproject/" actionDelete="deleteproject/">
-				<img src="/static/images/projecticon.png">
-				<input type="hidden" name="projectID" value={{project.id}}>
-				<input class="input-medium" id="project{{project.id}}" name="projectName" style="width:70%;  background-color:#3a87ad" value="{{project.name}}" disabled>
-				
-				<span class="btn-group"> 
-					<button class="btn-mini" id="project{{project.id}}buttonS" type="button" onclick="editProject({{project.id}});" disabled><img src="/static/images/save.png" alt="Save"></button>
-					<button class="btn-mini" id="project{{project.id}}buttonE" type="button" onclick="enableEdit('project{{project.id}}');"><img src="/static/images/edit.png" alt="Edit" ></button>
-					<button class="btn-mini" type="button" onclick="deleteProject('{{project.id}}');"><img src="/static/images/delete.png" alt="Delete"></button>
+		<div id="projectSpan{{project.id}}" align=left style="-webkit-border-bottom-right-radius: 20px;-webkit-border-bottom-left-radius: 20px;-moz-border-radius-bottomright: 20px;-moz-border-radius-bottomleft: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;overflow: hidden;margin-bottom:40px; background-color:#05F; width:800px">
+			<form id="projectFormEdit{{project.id}}" action="editproject/" actionDelete="deleteproject/" style="margin:15px">
+			<div style="display:table-row">
+				<div style="display:table-cell; padding-right:20px"><img src="/static/images/projecticon.png"></div>				
+				<div id="project{{project.id}}" name="projectName" style="display: table-cell; width:570px; color:white; font-size:16pt; font-weight: bold">{{project.name}}</div>
+				<span class="btn-group" style="display: table-cell; padding-left:20px">
+					<button class="btn" id="project{{project.id}}buttonS" type="submit" onclick="editProject({{project.id}});" disabled><img src="/static/images/save.png" alt="Save"></button>
+					<button class="btn" id="project{{project.id}}buttonE" type="button" onclick="enableEdit('project{{project.id}}');"><img src="/static/images/edit.png" alt="Edit" ></button>
+					<button class="btn" type="button" onclick="deleteProject('{{project.id}}');"><img src="/static/images/delete.png" alt="Delete"></button>
 				</span>				
-				</form>
-			</div>			
+			</div>
+			</form>
+				
 		
 		
-			<div style="width:720px">
-				<form id="projectForm{{project.id}}" action="addtask/">
+			<div>
+				<form id="projectForm{{project.id}}" action="addtask/" style="background-color:#BBB; margin:0">
 					<input type="hidden" name="parentID" value={{project.id}}>
-					<img src="/static/images/greenplus.png">				
-					<input type="text" class="span2" id="taskinproject{{project.id}}" name="taskName" placeholder="Start typing here to create a task..." style="width:55%">
-					<button class="btn" type="button" onclick="addTask({{project.id}});">Add Task</button>
+					<img src="/static/images/greenplus.png" style="padding:15px">				
+					<input type="text" class="span2" id="taskinproject{{project.id}}" name="taskName" placeholder="Start typing here to create a task..."style="width:75%;margin-bottom: 0px;border-right-width: 0px;padding-right: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px; border-radius: 0px;"><button class="btn" type="submit" onclick="addTask({{project.id}}); return false;" style="width:120px;padding-left: 0px;border-left-width: 0px; -webkit-border-top-left-radius: 0px; -moz-border-radius-top-left: 0px; border-top-left-radius: 0px; -webkit-border-bottom-left-radius: 0px; -moz-border-radius-bottom-left: 0px; border-bottom-left-radius: 0px;">Add Task</button>
 				</form>
 			</div>
 		
 		<span id="tasksForProject{{project.id}}">
-			{% for task in project.task_set.all %}
-		<div style="background-color:grey; width:500px" class = "nav-header">						
-			<form id="taskFormEdit{{task.id}}" action="edittask/" actionDelete="deletetask/">				
-				<input type="hidden" name="taskID" value={{task.id}}>	
-				<img src="/static/images/taskicon.png">			
-				<input id="task{{task.id}}" name="taskName" style="width:70%" value="{{task.name}}" disabled>								
-				<span class="btn-group"> 
-				<!--
-					<button class="btn-mini">Up</button>
-					<button class="btn-mini">Dn</button>
-					-->
-					<button class="btn-mini" id="task{{task.id}}buttonS" type="button" onclick="editTask({{task.id}});" disabled><img src="/static/images/save.png" alt="Save"></button>					
-					<button class="btn-mini" id="task{{task.id}}buttonE" type="button" onclick="enableEdit('task{{task.id}}');"><img src="/static/images/edit.png" alt="Edit" ></button>
-					<button class="btn-mini" type="button" onclick="deleteTask('taskFormEdit{{task.id}}');"><img src="/static/images/delete.png" alt="Delete"></button>				
-				</span>
+			{% for task in project.task_set.all %}		
+			<form id="taskFormEdit{{task.id}}" action="edittask/" actionDelete="deletetask/" style="background-color:white; height:50px; display:table-row">				
+				<div style="display: table-cell; padding:10px; border-style: dotted; border-width: thin "><img src="/static/images/taskicon.png"></div>
+				<div id="task{{task.id}}" name="taskName" style="width:580px; display: table-cell; border-style: dotted; border-width: thin; padding:20px; font-weight: bold">{{task.name}}</div>
+				<div class="btn-group" style="display: table-cell; border-style: dotted; border-width: thin; padding:10px"> 
+					<button class="btn" id="task{{task.id}}buttonS" type="submit" onclick="editTask({{task.id}});" disabled><img src="/static/images/save.png" alt="Save"></button>					
+					<button class="btn" id="task{{task.id}}buttonE" type="button" onclick="enableEdit('task{{task.id}}');"><img src="/static/images/edit.png" alt="Edit" ></button>
+					<button class="btn" type="button" onclick="deleteTask({{task.id}});"><img src="/static/images/delete.png" alt="Delete"></button>				
+				</div>
 			</form>
-			</div>
+		
 			{% endfor %}
 		</span>
 			
-		</span>		
+		</div>		
 
 
 		{% endfor %}
@@ -81,17 +74,17 @@
 	
 	</div>
 	<br>
-	<div class="container">
+	<div class="container" align=center>
 	<form id="projectFormAdd" action="addproject/">				
 				<span id="AddProject" style="visibility:hidden">				
-				<input type="text" class="span2" id="projectName" name="projectName" placeholder="Enter name of new project..." style="width:460px">
+				<input type="text" class="span2" id="projectName" name="projectName" placeholder="Enter name of new project..." style="width:670px; height:40px">
 				<span class="btn-group"> 					
-					<button class="btn-mini" type="button" onclick="addProject();"><img src="/static/images/save.png" alt="Add"></button>		
-					<button class="btn-mini" type="button" onclick="document.getElementById('AddProject').style.visibility = 'hidden';"><img src="/static/images/cancel.png" alt="Add"></button>							
+					<button class="btn-large" type="submit" onclick="addProject(); return false;"><img src="/static/images/save.png" alt="Add"></button>		
+					<button class="btn-large" type="button" onclick="document.getElementById('AddProject').style.visibility = 'hidden';"><img src="/static/images/cancel.png" alt="Add"></button>							
 				</span>
 				</span>
 				</form>
-		<button class="btn btn-primary btn-large" onclick="document.getElementById('AddProject').style.visibility = 'visible';">Add TODO List</button>
+		<button class="btn btn-primary btn-large" onclick="document.getElementById('AddProject').style.visibility = 'visible';" align="center">Add TODO List</button>
 	</div>
   </body>
 </html>
