@@ -130,7 +130,7 @@ Desktop.ini
 #############
 ## Python
 #############
-
+*.db
 *.py[co]
 
 # Packages
